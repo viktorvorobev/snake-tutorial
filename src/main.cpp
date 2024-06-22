@@ -1,4 +1,5 @@
 #include <iostream>
+#include <deque>
 #include <raylib.h>
 
 #define SCREEN_WIDTH 750  // px
@@ -7,6 +8,24 @@
 
 Color green = {173, 204, 96, 255};
 Color darkGreen = {43, 51, 24, 255};
+
+class Snake
+{
+public:
+    std::deque<Vector2> body{Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
+
+    void Draw()
+    {
+        for (unsigned int i = 0; i < body.size(); i++)
+        {
+            float x = body[i].x * CELL_SIZE;
+            float y = body[i].y * CELL_SIZE;
+
+            Rectangle segment{x, y, CELL_SIZE, CELL_SIZE};
+            DrawRectangleRounded(segment, 0.5, 6, darkGreen);
+        }
+    }
+};
 
 class Food
 {
@@ -50,7 +69,9 @@ int main()
 
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Retro Snake game");
     SetTargetFPS(60); // limit FPS
-    Food food = Food();
+
+    Food food{};
+    Snake snake{};
 
     while (WindowShouldClose() == false)
     {
@@ -59,6 +80,7 @@ int main()
         ClearBackground(green); // clear the screen and fill the background
 
         food.Draw();
+        snake.Draw();
 
         EndDrawing();
     }
