@@ -119,6 +119,7 @@ public:
     {
         snake.Update();
         CheckCollisionWithFood();
+        CheckCollisionWithEdges();
     }
 
     void CheckCollisionWithFood()
@@ -128,6 +129,23 @@ public:
             food.position = food.GenerateRandomPos(snake.body);
             snake.addSegment = true;
         }
+    }
+
+    void CheckCollisionWithEdges()
+    {
+        if (snake.body[0].x == SCREEN_WIDTH / CELL_SIZE || snake.body[0].x == -1)
+        {
+            GameOver();
+        }
+        else if (snake.body[0].y == SCREEN_HEIGHT / CELL_SIZE || snake.body[0].y == -1)
+        {
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        std::cout << "Game over" << std::endl;
     }
 };
 
