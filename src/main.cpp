@@ -73,6 +73,12 @@ public:
             body.pop_back();
         }
     }
+
+    void Reset()
+    {
+        body = INITIAL_BODY;
+        direction = DirectionRight;
+    }
 };
 
 class Food
@@ -153,7 +159,8 @@ public:
 
     void GameOver()
     {
-        std::cout << "Game over" << std::endl;
+        snake.Reset();
+        food.position = food.GenerateRandomPos(snake.body);
     }
 };
 
