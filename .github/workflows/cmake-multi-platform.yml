@@ -1,5 +1,5 @@
 # This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
-name: CMake on multiple platforms
+name: CI Checks
 
 on:
   push:
