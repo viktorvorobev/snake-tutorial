@@ -27,3 +27,11 @@ Playing around with code from [this tutorial](https://youtu.be/LGqsnM_WEK4?si=pr
    ```bash
    ./snake-game
    ```
+
+<details>
+
+<summary>Demo</summary>
+
+![demo.gif](https://github.com/viktorvorobev/snake-tutorial/blob/main/static/demo.gif)
+
+</details>
