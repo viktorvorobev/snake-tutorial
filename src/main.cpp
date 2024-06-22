@@ -11,7 +11,7 @@ Color darkGreen = {43, 51, 24, 255};
 class Food
 {
 public:
-    Vector2 position = {5, 6}; // initial place for Food object
+    Vector2 position;
     Texture2D texture;
 
     Food()
@@ -19,6 +19,8 @@ public:
         Image image = LoadImage("../graphics/food.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
+
+        position = GenerateRandomPos();
     }
 
     ~Food()
@@ -29,6 +31,13 @@ public:
     void Draw()
     {
         DrawTexture(texture, position.x * CELL_SIZE, position.y * CELL_SIZE, WHITE);
+    }
+
+    Vector2 GenerateRandomPos()
+    {
+        float x = GetRandomValue(0, SCREEN_WIDTH / CELL_SIZE - 1);
+        float y = GetRandomValue(0, SCREEN_HEIGHT / CELL_SIZE - 1);
+        return Vector2{x, y};
     }
 
 private:
