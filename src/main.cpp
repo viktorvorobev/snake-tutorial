@@ -10,6 +10,19 @@
 Color green{173, 204, 96, 255};
 Color darkGreen{43, 51, 24, 255};
 
+double lastUpdateTime{0};
+
+bool eventTriggered(double interval)
+{
+    double currentTime = GetTime();
+    if (currentTime - lastUpdateTime >= interval)
+    {
+        lastUpdateTime = currentTime;
+        return true;
+    }
+    return false;
+}
+
 class Snake
 {
 public:
@@ -83,6 +96,11 @@ int main()
     while (WindowShouldClose() == false)
     {
         BeginDrawing();
+
+        if (eventTriggered(0.2))
+        {
+            snake.Update();
+        }
 
         ClearBackground(green); // clear the screen and fill the background
 
