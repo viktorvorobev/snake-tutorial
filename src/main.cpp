@@ -6,8 +6,8 @@
 #define SCREEN_HEIGHT 750 // px
 #define CELL_SIZE 30      // px
 
-Color green = {173, 204, 96, 255};
-Color darkGreen = {43, 51, 24, 255};
+Color green{173, 204, 96, 255};
+Color darkGreen{43, 51, 24, 255};
 
 class Snake
 {
