@@ -62,11 +62,6 @@ public:
         position = GenerateRandomPos();
     }
 
-    ~Food()
-    {
-        UnloadTexture(texture);
-    }
-
     void Draw()
     {
         DrawTexture(texture, position.x * CELL_SIZE, position.y * CELL_SIZE, WHITE);
