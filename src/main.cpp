@@ -122,6 +122,7 @@ class Game
 public:
     Snake snake{};
     Food food{snake.body};
+    bool running = true;
 
     void Draw()
     {
@@ -131,6 +132,10 @@ public:
 
     void Update()
     {
+        if (!running)
+        {
+            return;
+        }
         snake.Update();
         CheckCollisionWithFood();
         CheckCollisionWithEdges();
@@ -161,6 +166,7 @@ public:
     {
         snake.Reset();
         food.position = food.GenerateRandomPos(snake.body);
+        running = false;
     }
 };
 
@@ -185,18 +191,22 @@ int main()
         if (IsKeyPressed(KEY_UP) && game.snake.direction.y != 1)
         {
             game.snake.direction = game.snake.DirectionUp;
+            game.running = true;
         }
         if (IsKeyPressed(KEY_DOWN) && game.snake.direction.y != -1)
         {
             game.snake.direction = game.snake.DirectionDown;
+            game.running = true;
         }
         if (IsKeyPressed(KEY_LEFT) && game.snake.direction.x != 1)
         {
             game.snake.direction = game.snake.DirectionLeft;
+            game.running = true;
         }
         if (IsKeyPressed(KEY_RIGHT) && game.snake.direction.x != -1)
         {
             game.snake.direction = game.snake.DirectionRight;
+            game.running = true;
         }
 
         ClearBackground(green); // clear the screen and fill the background
