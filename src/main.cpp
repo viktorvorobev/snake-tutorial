@@ -40,6 +40,7 @@ class Snake
 public:
     std::deque<Vector2> body{Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
     Vector2 direction{1, 0};
+    bool addSegment = false;
 
     void Draw()
     {
@@ -54,8 +55,15 @@ public:
     }
     void Update()
     {
-        body.pop_back();
         body.push_front(Vector2Add(body[0], direction));
+        if (addSegment)
+        {
+            addSegment = false;
+        }
+        else
+        {
+            body.pop_back();
+        }
     }
 };
 
@@ -118,6 +126,7 @@ public:
         if (Vector2Equals(snake.body[0], food.position))
         {
             food.position = food.GenerateRandomPos(snake.body);
+            snake.addSegment = true;
         }
     }
 };
