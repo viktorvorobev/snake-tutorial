@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <raymath.h>
 
+#define TITLE "Retro snake game"
 #define SCREEN_WIDTH 750  // px
 #define SCREEN_HEIGHT 750 // px
 #define CELL_SIZE 30      // px
@@ -184,9 +185,7 @@ public:
 
 int main()
 {
-    std::cout << "Starting the game..." << std::endl;
-
-    InitWindow(SCREEN_WIDTH + 2 * OFFSET, SCREEN_HEIGHT + 2 * OFFSET, "Retro Snake game");
+    InitWindow(SCREEN_WIDTH + 2 * OFFSET, SCREEN_HEIGHT + 2 * OFFSET, TITLE);
     SetTargetFPS(60); // limit FPS
 
     Game game{};
@@ -225,6 +224,7 @@ int main()
 
         Rectangle border{OFFSET - 5, OFFSET - 5, SCREEN_WIDTH + 10, SCREEN_HEIGHT + 10};
         DrawRectangleLinesEx(border, 5, darkGreen);
+        DrawText(TITLE, OFFSET - 5, 20, 40, darkGreen);
 
         game.Draw();
 
