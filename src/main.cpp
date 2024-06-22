@@ -78,6 +78,24 @@ private:
     int cellPart = CELL_SIZE / 3;
 };
 
+class Game
+{
+public:
+    Snake snake{};
+    Food food{};
+
+    void Draw()
+    {
+        food.Draw();
+        snake.Draw();
+    }
+
+    void Update()
+    {
+        snake.Update();
+    }
+};
+
 int main()
 {
     std::cout << "Starting the game..." << std::endl;
@@ -85,8 +103,7 @@ int main()
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Retro Snake game");
     SetTargetFPS(60); // limit FPS
 
-    Food food{};
-    Snake snake{};
+    Game game{};
 
     while (WindowShouldClose() == false)
     {
@@ -94,30 +111,29 @@ int main()
 
         if (eventTriggered(0.2))
         {
-            snake.Update();
+            game.Update();
         }
 
-        if (IsKeyPressed(KEY_UP) && snake.direction.y != 1)
+        if (IsKeyPressed(KEY_UP) && game.snake.direction.y != 1)
         {
-            snake.direction = {0, -1};
+            game.snake.direction = {0, -1};
         }
-        if (IsKeyPressed(KEY_DOWN) && snake.direction.y != -1)
+        if (IsKeyPressed(KEY_DOWN) && game.snake.direction.y != -1)
         {
-            snake.direction = {0, 1};
+            game.snake.direction = {0, 1};
         }
-        if (IsKeyPressed(KEY_LEFT) && snake.direction.x != 1)
+        if (IsKeyPressed(KEY_LEFT) && game.snake.direction.x != 1)
         {
-            snake.direction = {-1, 0};
+            game.snake.direction = {-1, 0};
         }
-        if (IsKeyPressed(KEY_RIGHT) && snake.direction.x != -1)
+        if (IsKeyPressed(KEY_RIGHT) && game.snake.direction.x != -1)
         {
-            snake.direction = {1, 0};
+            game.snake.direction = {1, 0};
         }
 
         ClearBackground(green); // clear the screen and fill the background
 
-        food.Draw();
-        snake.Draw();
+        game.Draw();
 
         EndDrawing();
     }
