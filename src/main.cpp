@@ -139,6 +139,7 @@ public:
         snake.Update();
         CheckCollisionWithFood();
         CheckCollisionWithEdges();
+        CheckCollisionWithTail();
     }
 
     void CheckCollisionWithFood()
@@ -157,6 +158,16 @@ public:
             GameOver();
         }
         else if (snake.body[0].y == SCREEN_HEIGHT / CELL_SIZE || snake.body[0].y == -1)
+        {
+            GameOver();
+        }
+    }
+
+    void CheckCollisionWithTail()
+    {
+        std::deque<Vector2> headlessBody = snake.body;
+        headlessBody.pop_front();
+        if (ElementInDeque(snake.body[0], headlessBody))
         {
             GameOver();
         }
