@@ -1,6 +1,7 @@
 #include <iostream>
 #include <deque>
 #include <raylib.h>
+#include <raymath.h>
 
 #define SCREEN_WIDTH 750  // px
 #define SCREEN_HEIGHT 750 // px
@@ -13,6 +14,7 @@ class Snake
 {
 public:
     std::deque<Vector2> body{Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
+    Vector2 direction{1, 0};
 
     void Draw()
     {
@@ -24,6 +26,11 @@ public:
             Rectangle segment{x, y, CELL_SIZE, CELL_SIZE};
             DrawRectangleRounded(segment, 0.5, 6, darkGreen);
         }
+    }
+    void Update()
+    {
+        body.pop_back();
+        body.push_front(Vector2Add(body[0], direction));
     }
 };
 
