@@ -6,6 +6,7 @@
 #define SCREEN_WIDTH 750  // px
 #define SCREEN_HEIGHT 750 // px
 #define CELL_SIZE 30      // px
+#define OFFSET 75         // px, borders around the screen
 
 Color green{173, 204, 96, 255};
 Color darkGreen{43, 51, 24, 255};
@@ -54,8 +55,8 @@ public:
     {
         for (unsigned int i = 0; i < body.size(); i++)
         {
-            float x = body[i].x * CELL_SIZE;
-            float y = body[i].y * CELL_SIZE;
+            float x = (body[i].x * CELL_SIZE) + OFFSET;
+            float y = (body[i].y * CELL_SIZE) + OFFSET;
 
             Rectangle segment{x, y, CELL_SIZE, CELL_SIZE};
             DrawRectangleRounded(segment, 0.5, 6, darkGreen);
@@ -98,7 +99,7 @@ public:
 
     void Draw()
     {
-        DrawTexture(texture, position.x * CELL_SIZE, position.y * CELL_SIZE, WHITE);
+        DrawTexture(texture, (position.x * CELL_SIZE) + OFFSET, (position.y * CELL_SIZE) + OFFSET, WHITE);
     }
 
     Vector2 GenerateRandomPos(std::deque<Vector2> &snakeBody)
@@ -185,7 +186,7 @@ int main()
 {
     std::cout << "Starting the game..." << std::endl;
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Retro Snake game");
+    InitWindow(SCREEN_WIDTH + 2 * OFFSET, SCREEN_HEIGHT + 2 * OFFSET, "Retro Snake game");
     SetTargetFPS(60); // limit FPS
 
     Game game{};
@@ -221,6 +222,9 @@ int main()
         }
 
         ClearBackground(green); // clear the screen and fill the background
+
+        Rectangle border{OFFSET - 5, OFFSET - 5, SCREEN_WIDTH + 10, SCREEN_HEIGHT + 10};
+        DrawRectangleLinesEx(border, 5, darkGreen);
 
         game.Draw();
 
