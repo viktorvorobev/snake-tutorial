@@ -12,21 +12,23 @@ class Food
 {
 public:
     Vector2 position = {5, 6}; // initial place for Food object
+    Texture2D texture;
+
+    Food()
+    {
+        Image image = LoadImage("../graphics/food.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+    }
+
+    ~Food()
+    {
+        UnloadTexture(texture);
+    }
 
     void Draw()
     {
-        for (int xOffset = 0; xOffset < 3; xOffset++)
-        {
-            for (int yOffset = 0; yOffset < 3; yOffset++)
-            {
-                if ((xOffset + yOffset) % 2)
-                {
-                    int xPos = (position.x * CELL_SIZE) + cellPart * xOffset;
-                    int yPos = (position.y * CELL_SIZE) + cellPart * yOffset;
-                    DrawRectangle(xPos, yPos, cellPart, cellPart, darkGreen);
-                }
-            }
-        }
+        DrawTexture(texture, position.x * CELL_SIZE, position.y * CELL_SIZE, WHITE);
     }
 
 private:
