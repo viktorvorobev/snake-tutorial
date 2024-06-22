@@ -37,9 +37,17 @@ bool eventTriggered(double interval)
 
 class Snake
 {
+private:
+    std::deque<Vector2> INITIAL_BODY{Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
+
 public:
-    std::deque<Vector2> body{Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
-    Vector2 direction{1, 0};
+    Vector2 DirectionRight{1, 0};
+    Vector2 DirectionLeft{-1, 0};
+    Vector2 DirectionUp{0, -1};
+    Vector2 DirectionDown{0, 1};
+
+    std::deque<Vector2> body = INITIAL_BODY;
+    Vector2 direction = DirectionRight;
     bool addSegment = false;
 
     void Draw()
@@ -169,19 +177,19 @@ int main()
 
         if (IsKeyPressed(KEY_UP) && game.snake.direction.y != 1)
         {
-            game.snake.direction = {0, -1};
+            game.snake.direction = game.snake.DirectionUp;
         }
         if (IsKeyPressed(KEY_DOWN) && game.snake.direction.y != -1)
         {
-            game.snake.direction = {0, 1};
+            game.snake.direction = game.snake.DirectionDown;
         }
         if (IsKeyPressed(KEY_LEFT) && game.snake.direction.x != 1)
         {
-            game.snake.direction = {-1, 0};
+            game.snake.direction = game.snake.DirectionLeft;
         }
         if (IsKeyPressed(KEY_RIGHT) && game.snake.direction.x != -1)
         {
-            game.snake.direction = {1, 0};
+            game.snake.direction = game.snake.DirectionRight;
         }
 
         ClearBackground(green); // clear the screen and fill the background
