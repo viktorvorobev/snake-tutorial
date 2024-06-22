@@ -125,6 +125,7 @@ public:
     Snake snake{};
     Food food{snake.body};
     bool running = true;
+    int score = 0;
 
     void Draw()
     {
@@ -150,6 +151,7 @@ public:
         {
             food.position = food.GenerateRandomPos(snake.body);
             snake.addSegment = true;
+            score++;
         }
     }
 
@@ -180,6 +182,7 @@ public:
         snake.Reset();
         food.position = food.GenerateRandomPos(snake.body);
         running = false;
+        score = 0;
     }
 };
 
@@ -225,6 +228,7 @@ int main()
         Rectangle border{OFFSET - 5, OFFSET - 5, SCREEN_WIDTH + 10, SCREEN_HEIGHT + 10};
         DrawRectangleLinesEx(border, 5, darkGreen);
         DrawText(TITLE, OFFSET - 5, 20, 40, darkGreen);
+        DrawText(TextFormat("Score: %i", game.score), OFFSET - 5, OFFSET + SCREEN_HEIGHT + 10, 40, darkGreen);
 
         game.Draw();
 
